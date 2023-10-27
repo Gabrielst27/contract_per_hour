@@ -1,6 +1,7 @@
 package entities;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import entities.enums.WorkerLevel;
@@ -67,6 +68,24 @@ public class Worker {
 	
 	public void removeContract(HourContract contract) {
 		contracts.remove(contract);
+	}
+	
+	// income: calcular o ganho do trabalhador a partir do salário base somado a cada
+	// contratohorista do mesmo ano e mês
+	public double income(int year, int month) {
+		double sum = baseSalary;
+		Calendar cal = Calendar.getInstance(); // Criado Calendar para obter ano e mês
+		for (HourContract c : contracts) {
+			cal.setTime(c.getDate()); 		   // Puxa a data do contrato e a define como sendo data do calendário
+			int c_year = cal.get(Calendar.YEAR);
+			int c_month = cal.get(Calendar.MONTH) + 1;
+			
+			// Conferir, agora, se o mês e ano do contrato são iguais aos dos parâmetros
+			if(year == c_year && month == c_month) {
+				sum += c.totalValue();
+			}
+		}
+		return sum;
 	}
 
 }
