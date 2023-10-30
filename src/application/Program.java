@@ -18,7 +18,6 @@ public class Program {
 		Locale.setDefault(Locale.US);
 		Scanner sc = new Scanner(System.in);
 		SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
-		SimpleDateFormat sdf2 = new SimpleDateFormat("MM/yyyy");
 		
 		System.out.print("Enter department's name: ");
 		String depName = sc.nextLine();
@@ -57,9 +56,7 @@ public class Program {
 		System.out.println("Name: "+worker.getName());
 		System.out.println("Department: "+worker.getDepartment().getName());
 		
-		
-		
-		System.out.println("Income for "+month+"/"+year+": ");
+		System.out.printf("Income for %s: %.2f\n", monthAndYear, worker.income(year, month));
 		
 		sc.close();
 
